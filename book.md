@@ -2,7 +2,7 @@
 layout: page
 title: "The Book"
 description: "Computational Optimal Transport"
-header-img: "img/5395977052_3bd157c466_b"
+header-img: "img/5395977052_3bd157c466_b.jpg"
 ---
 
 You can retrieve the draft of the book:
