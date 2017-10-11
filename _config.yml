@@ -1,0 +1,20 @@
+# Usign the Clean Blog theme
+
+title: Computational Optimal Transport
+author: mathematical-tours
+email: gabriel.peyre@ens.fr
+description: Computational Optimal Transport
+baseurl: ""
+url: "http://optimaltransport.github.io/"
+github_username:  optimaltransport
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+paginate: 5
+exclude: ["node_modules"]
+
+name: Computational Optimal Transport
+gems:
+  - jekyll-feed
+  - jekyll-paginate
