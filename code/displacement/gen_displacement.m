@@ -3,9 +3,14 @@
 
 addpath('../toolbox/');
 addpath('../toolbox/mexEMD/');
-addpath('./toolbox/img/');
+addpath('../toolbox/toolbox-lsap/');
+addpath('../toolbox/img/');
 
-rep = ['results/displacement/'];
+
+names = {'annulus', 'cat'};
+names = {'disk', 'two_disks'};
+
+rep = ['../results/displacement/' names{1} '-' names{2} '/'];
 [~,~] = mkdir(rep);
 
 % helpers
@@ -16,7 +21,6 @@ myplotS = @(x,y,ms,col)plot(x,y, '.', 'MarkerSize', ms, 'MarkerEdgeColor', col, 
 
 
 % load the shapes
-names = {'disk', 'two_disks'};
 n0 = 200;
 xy = {};
 for i=1:2
@@ -32,6 +36,20 @@ for i=1:2
     xy{i} = (xy{i}-1)/(n0-1);
 end
 N = [size(xy{1},1), size(xy{2},1)];
+
+% use fast LSAP code
+use_lsap = 0;
+
+% target points
+if use_lsap
+    Ntgt = min(5000,min(N(:)));
+    for i=1:2
+        % subsample
+        I = randperm(size(xy{i},1));
+        xy{i} = xy{i}(I(1:Ntgt),:);
+    end
+    N = [size(xy{1},1), size(xy{2},1)];
+end
 
 
 %%
@@ -49,13 +67,21 @@ myplot(xy{2}(:,1), xy{2}(:,2), 'b');
 a = ones(N(1),1) / N(1);
 b = ones(N(2),1) / N(2);
 C = distmat(xy{1}',xy{2}').^2;
-[cost,gamma] = mexEMD(a,b,C);
+if use_lsap
+    C1 = int32( round(C*1e6) );
+    [J,varrho,u,v] = hungarianLSAP(C1);
+    I = (1:N(1))'; 
+    gammaij = ones(N(1),1)/N(1);    
+else
+    [cost,gamma] = mexEMD(a,b,C);
+    [I,J,gammaij] = find(gamma);
+end
 
 %%
 % Render using density estimator.
 
-[I,J,gammaij] = find(gamma);
-tlist = linspace(0,1,5);
+q = 50; % #frames
+tlist = linspace(0,1,q);
 for k=1:length(tlist)
     t=tlist(k);
     col = [1-t;0;t];
@@ -97,7 +123,8 @@ CS = distmat(xyS{1}',xyS{2}').^2;
 [cost,gammaS] = mexEMD(ones(P,1)/P,ones(P,1)/P,CS);
 
 [I,J,gammaij] = find(gammaS);
-tlist = linspace(0,1,5);
+tlist = linspace(0,1,q);
+ms = 30;
 for k=1:length(tlist)
     t=tlist(k);
     Xt = (1-t)*xyS{1}(I,:) + t*xyS{2}(J,:);
@@ -105,7 +132,7 @@ for k=1:length(tlist)
     clf;
     hold on;
     for i=1:length(gammaij)
-        myplotS(Xt(i,1), Xt(i,2), 20, [1-t 0 t]);
+        myplotS(Xt(i,2), Xt(i,1), ms, [1-t 0 t]);
     end
     axis([0 1 0 1]);
     % dummy points
@@ -113,5 +140,5 @@ for k=1:length(tlist)
     axis equal; axis square;
     axis off; axis ij;
     drawnow;
-	saveas(gcf, [rep 'interp-points-' num2str(k) '.eps'], 'epsc');
+	saveas(gcf, [rep 'interp-points-' num2str(k) '.png'], 'png');
 end

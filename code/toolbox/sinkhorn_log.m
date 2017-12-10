@@ -52,6 +52,8 @@ dotp = @(x,y)sum(x(:).*y(:));
 err = [];
 u = zeros(N(1),1); 
 v = zeros(N(2),1);
+gamma = exp(M(u,v));
+Wprimal = []; Wdual = [];
 for i=1:niter
     if verb==1
         progressbar(i,niter);

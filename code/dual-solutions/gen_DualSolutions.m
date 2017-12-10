@@ -1,16 +1,16 @@
 Nx=4;
 Ny=6;
 
-r=randomPointinDSimplex(Nx)+.05;
+%r=randomPointinDSimplex(Nx)+.05;
 r=[.1,.3,.4,.2]'
 %r=ones(Nx,1)/Nx;
-r=r/sum(r);
-c=randomPointinDSimplex(Ny)+.05;
+%r=r/sum(r);
+%c=randomPointinDSimplex(Ny)+.05;
 c=[.1,.1,.2,.2,.3,.1]'
-c=c/sum(c);
+%c=c/sum(c);
 
 %c=ones(Ny,1)/Ny;
-X=.8*randn(2,Nx)+0; 
+X=1*randn(2,Nx)+0; 
 X(:,end)=[-1.5;-2]
 
 Y=randn(2,Ny)+1.3;%1.5;
@@ -37,7 +37,7 @@ ab(Nx+1:end)=ab(Nx+1:end)+median(ab)
 
 
 
-figure()
+figure('color','white')
 
 scaling_factor=1000;
 
@@ -49,20 +49,21 @@ for i=1:length(I)
 end
 
 
-scatter(X(1,:),X(2,:),sqrt(r)*scaling_factor,'b','filled','markeredgecolor','k')
+scatter(X(1,:),X(2,:),sqrt(r)*scaling_factor,'ob','filled','markeredgecolor','b')
 hold on
 
-scatter(Y(1,:),Y(2,:),sqrt(c)*scaling_factor,'r','filled','markeredgecolor','k')    
+scatter(Y(1,:),Y(2,:),sqrt(c)*scaling_factor,'sr','filled','markeredgecolor','r')    
 set(gca,'fontsize',16);
 set(gca,'xticklabel',{[]}) 
 set(gca,'yticklabel',{[]}) 
 grid on;
 
+
 subaxis(1,2,2)
 colormap hot
-scatter(X(1,:),X(2,:),sqrt(r)*scaling_factor,ab(1:Nx),'^','filled','markeredgecolor','k')
+scatter(X(1,:),X(2,:),sqrt(r)*scaling_factor,ab(1:Nx),'o','filled','markeredgecolor','b','LineWidth',2)
 hold on
-scatter(Y(1,:),Y(2,:),sqrt(c)*scaling_factor,ab(Nx+1:Nx+Ny),'v','filled','markeredgecolor','k')    
+scatter(Y(1,:),Y(2,:),sqrt(c)*scaling_factor,ab(Nx+1:Nx+Ny),'s','filled','markeredgecolor','r','LineWidth',2)    
 cc = colorbar;
 
 set(cc,'Location','manual')
@@ -70,6 +71,6 @@ set(gca,'fontsize',16);
 set(gca,'yticklabel',{[]}) 
 set(gca,'xticklabel',{[]}) 
 grid on;
-
+box on;
 
 
