@@ -31,3 +31,4 @@ You can find here slides for tutorials and courses that cover the topics of [the
 - [Numerical Optimal Transport and Applications](https://speakerdeck.com/gpeyre/numerical-optimal-transport-and-applications): similar but with more mathematics.
 - [From Monge-Kantorovich to Gromov-Wasserstein](https://speakerdeck.com/gpeyre/from-monge-kantorovich-to-gromov-wasserstein-optimal-transport-and-barycenters-between-several-metric-spaces): introcution to Gromov-Wasserstein.
 - [Le transport optimal et ses applications](https://speakerdeck.com/gpeyre/le-transport-optimal-et-ses-applications): introduction slides, in French.
+- [Course notes on basics of discrete OT](../slides-peyre/course-note-ot-basics.pdf)
