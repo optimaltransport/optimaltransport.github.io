@@ -8,6 +8,8 @@ header-img: "img/23148803089_8bb3899d9a_k.jpg"
 Slides for a Course
 -------------------
 
+The associated [course notes are also available](../slides-peyre/CourseOT.pdf).
+
 - [Theoretical Foundations](../slides-peyre/TheoreticalFoundations.pdf)
 - [Algorithmic Foundations](../slides-peyre/AlgorithmicFoundations.pdf)
 - [Applications](../slides-peyre/Applications.pdf)
