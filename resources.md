@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Computatinal Resources"
+title: "Computational Resources"
 description: "on Optimal Transport"
 header-img: "img/22127755783_33dc9bd7a4_k.jpg"
 ---
@@ -9,7 +9,7 @@ header-img: "img/22127755783_33dc9bd7a4_k.jpg"
 Reproducing the Figures of the Book
 -------------------
 
-The Matlab code to reproduce most of the figure of the book [is available online](https://github.com/optimaltransport/optimaltransport.github.io/tree/master/code).
+The Matlab code to reproduce most of the figures of the book [is available online](https://github.com/optimaltransport/optimaltransport.github.io/tree/master/code).
 
 
 Other Resources
